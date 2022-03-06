@@ -4,6 +4,7 @@ defmodule Chat.Application do
   @moduledoc false
 
   use Application
+  require Logger
 
   @impl true
   def start(_type, _args) do
@@ -30,5 +31,10 @@ defmodule Chat.Application do
   def config_change(changed, _new, removed) do
     ChatWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+  @impl true
+  def handle_event("random-room", _params, socket) do
+    Logger.info("sadd")
+    {:noreply, socket}
   end
 end
